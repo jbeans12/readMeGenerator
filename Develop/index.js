@@ -7,7 +7,7 @@ inquirer
 .prompt([
     {
         type: 'input',
-        name: 'project title',
+        name: 'projectTitle',
         message: 'What is your project title?',
     },
     {
@@ -17,12 +17,12 @@ inquirer
     },
     {
         type: 'input',
-        name: 'instilation instructions',
+        name: 'instilation',
         message: 'What are the installation instructions?',
     },
     {
         type: 'input',
-        name: 'usage information',
+        name: 'usage',
         message: 'Is there any usage information?',
     },
     {
@@ -32,12 +32,12 @@ inquirer
     },
     {
         type: 'input',
-        name: 'test instructions',
+        name: 'test',
         message: 'What are the test instructions for this project?',
     },
     {
         type: 'input',
-        name: 'gitHub username',
+        name: 'gitHub',
         message: 'What is your gitHub username?',
     },
     {
@@ -47,34 +47,37 @@ inquirer
     },
 
  ])
- .then((data) => {
-     console.log(data)
-//      var html = `<!DOCTYPE html>
-//      <html lang="en">
-//      <head>
-//        <meta charset="UTF-8">
-//        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//        <title>Document</title>
-//      </head>
-//      <body>
-//        <div id="profile">
-         
-//        </div>
-       
-//        <script type="text/javascript" src="index.js"></script>
-//      </body>
-//      </html>`;
-//  })
+    .then((data) => {
+        console.log(data)
 
-//  fs.writeFile(index.html, html, function (err) {
-//      if (err) console.log(err)
- })
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+        var html = `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <title>ReadMe Generator</title>
+        </head>
+        <body>
+          <div id="profile">
+            <h1> ${data.projectTitle}</h1>
+            <h3> ${data.description}</h3>
+            <h3> ${data.instalation}</h3>
+          </div>
+          
+          <script type="text/javascript" src="index.js"></script>
+        </body>
+        </html>`;
+        
+        fs.writeFile('index.html', html, function (err) {
+            if (err) console.log(err)
+        })
+    });
+// .then((myAnswers) => {
+//     const htmlPage = generateHTML(myAnswers);
 
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
+//     fs.writeFile('index.html', htmlPage, function(err) {
+//         if (err) console.log(err)
+//     });
+// });
