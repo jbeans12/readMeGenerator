@@ -1,7 +1,6 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-
 // TODO: Create an array of questions for user input
 inquirer
 .prompt([
@@ -13,27 +12,43 @@ inquirer
     {
         type: 'input',
         name: 'description',
-        message: 'Please give a discription of your project.',
+        message: 'Please give a discription of your project:',
     },
     {
         type: 'input',
-        name: 'instilation',
-        message: 'What are the installation instructions?',
+        name: 'instalation',
+        message: 'What are the installation instructions if any?',
     },
     {
         type: 'input',
         name: 'usage',
-        message: 'Is there any usage information?',
+        message: 'What is this project used for?',
+    },
+    {
+        type: "list",
+        name: "license",
+        message: "Chose the appropriate license for this project: ",
+        choices: [
+            "Apache",
+            "GPL",
+            "ISC",
+            "Mozilla"
+        ]
     },
     {
         type: 'input',
-        name: 'contribution guidelines',
-        message: 'What are the contribution guidlines for this project?',
+        name: 'contribution',
+        message: 'Who are the contributors on this project?',
     },
     {
         type: 'input',
         name: 'test',
-        message: 'What are the test instructions for this project?',
+        message: 'Is there a test for this project?',
+    },
+    {
+        type: 'input',
+        name: 'questions',
+        message: 'What should I do if I have problems with this project?'
     },
     {
         type: 'input',
@@ -44,10 +59,10 @@ inquirer
         type: 'input',
         name: 'email',
         message: 'What is your email address?',
-    },
+    }
 
  ])
-    .then((data) => {
+ .then((data) => {
         console.log(data)
 
         var html = `<!DOCTYPE html>
@@ -60,10 +75,17 @@ inquirer
           <title>ReadMe Generator</title>
         </head>
         <body>
-          <div id="profile">
-            <h1> ${data.projectTitle}</h1>
-            <h3> ${data.description}</h3>
-            <h3> ${data.instalation}</h3>
+          <div class="container">
+            <h1 class="h1"> Project Title: ${data.projectTitle}</h1>
+            <p class="h2"> Project Description: <small class="text-muted"> ${data.description}</small></p>
+            <p class="h2"> Instalation Instructions: <small class="text-muted"> ${data.instalation}</small></p>
+            <p class="h2"> Usage Information: <small class="text-muted"> ${data.usage}</small></p>
+            <p class="h2"> Contribution Guidelines: <small class="text-muted"> ${data.contribution}</small></p>
+            <p class="h2"> Test Instructions: <small class="text-muted"> ${data.test}</small></p>
+            <p class="h2"> Questions?${data.questions}</p>
+            <ul class="list-group"> 
+                <li class="list-group-item">GitHub Link:${data.gitHub}</li> 
+                <li class="list-group-item">Email link:${data.email}</li>
           </div>
           
           <script type="text/javascript" src="index.js"></script>
@@ -73,11 +95,29 @@ inquirer
         fs.writeFile('index.html', html, function (err) {
             if (err) console.log(err)
         })
-    });
-// .then((myAnswers) => {
-//     const htmlPage = generateHTML(myAnswers);
+ }); 
+    
 
-//     fs.writeFile('index.html', htmlPage, function(err) {
-//         if (err) console.log(err)
-//     });
-// });
+ 
+
+//  // TODO: Create a function to write README file
+//  function writeToFile(fileName, data) {
+//      fs.writeFile(fileName, data, err => {
+//          if (err) {
+//              return console.log(err);
+//          }
+//          console.log("Your ReadMe.md file has been generated!")
+//      });
+//  }
+
+ 
+// // TODO: Create a function to initialize app
+// function init() {
+   
+
+// };
+
+// // Function call to initialize app
+// init();
+
+    
